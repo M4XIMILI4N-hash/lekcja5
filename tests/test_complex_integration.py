@@ -80,3 +80,13 @@ def test_apartment_costs_with_optional_parameters():
 
     costs = manager.get_apartment_costs('apart-polanka')
     assert costs == 3532.0
+
+def test_apartment_costs_invalid_month():
+    parameters = Parameters()
+    manager = Manager(parameters)
+    manager.apartments = {'A1': 'DummyApartment'}
+    
+   
+    import pytest
+    with pytest.raises(ValueError, match="Miesiąc musi być z zakresu od 1 do 12"):
+        manager.get_apartment_costs('A1', 2024, 13)
